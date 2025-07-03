@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\DiskonModel;
 use App\Models\UserModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -13,6 +14,7 @@ class AuthController extends BaseController
     {
         helper('form');
         $this->user = new UserModel();
+        $this->diskonModel = new DiskonModel();
     }
     public function login()
     {
@@ -35,7 +37,17 @@ class AuthController extends BaseController
                             'role' => $dataUser['role'],
                             'isLoggedIn' => TRUE
                         ]);
+                        //Logika diskon mulai
+                        $today = date('Y-m-d');
+                        $diskonToday = $this->diskonModel->where('tanggal', $today)->first();
 
+                        if ($diskonToday) {
+                            session()->set('nominalDiskon', $diskonToday['nominal']);
+                        } else {
+                            session()->remove('nominalDiskon');
+                            session()->setFlashdata('info', 'tidak ada diskon hari ini');
+                        }
+                        //Logika diskon selesai
                         return redirect()->to(base_url('/'));
                     } else {
                         session()->setFlashdata('failed', 'Kombinasi Username & Password Salah');

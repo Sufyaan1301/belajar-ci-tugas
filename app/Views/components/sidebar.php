@@ -21,6 +21,18 @@
       </a>
     </li><!-- End Produk Nav -->
     <li class="nav-item">
+      <a class="nav-link <?php echo (uri_string() == 'diskon') ? "" : "collapsed" ?>" href="diskon">
+        <i class="bi bi-receipt"></i>
+        <span>Diskon</span>
+      </a>
+    </li><!-- End Diskon Nav -->
+    <li class="nav-item">
+      <a class="nav-link <?php echo (uri_string() == 'pembelian') ? "" : "collapsed" ?>" href="pembelian">
+        <i class="bi bi-receipt"></i>
+        <span>Pembelian</span>
+      </a>
+    </li><!-- End Manajemen Nav -->
+    <li class="nav-item">
       <a class="nav-link <?php echo (uri_string() == 'profile') ? "" : "collapsed" ?>" href="profile">
         <i class="bi bi-person"></i>
         <span>Profile</span>

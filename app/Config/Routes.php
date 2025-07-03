@@ -25,6 +25,12 @@ $routes->group('produk-kategori', ['filter' => 'auth'], function ($routes) {
     $routes->post('edit/(:any)', 'ProductCategory::edit/$1');
     $routes->get('delete/(:any)', 'ProductCategory::delete/$1');
 });
+$routes->group('diskon', ['filter' => 'admin'], function ($routes) {
+    $routes->get('', 'DiskonController::index');
+    $routes->post('', 'DiskonController::create');
+    $routes->post('edit/(:any)', 'DiskonController::edit/$1');
+    $routes->get('delete/(:any)', 'DiskonController::delete/$1');
+});
 
 $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->get('', 'TransaksiController::index');
@@ -32,6 +38,11 @@ $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->post('edit', 'TransaksiController::cart_edit');
     $routes->get('delete/(:any)', 'TransaksiController::cart_delete/$1');
     $routes->get('clear', 'TransaksiController::cart_clear');
+});
+
+$routes->group('pembelian', ['filter' => 'admin'], function ($routes) {
+    $routes->get('', 'PembelianController::index');
+    $routes->post('edit/(:any)', 'PembelianController::edit/$1');
 });
 
 $routes->get('/checkout', 'TransaksiController::checkout', ['filter' => 'auth']);

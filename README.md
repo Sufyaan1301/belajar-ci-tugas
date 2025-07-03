@@ -25,6 +25,8 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
   - Manajemen kategori
   - Laporan transaksi
   - Export data ke PDF
+  - Update Status Transaksi
+  - Manajemen Diskon (CRUD)
 - Sistem Autentikasi
   - Login/Register pengguna
   - Manajemen akun
@@ -34,13 +36,13 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
 
 - PHP >= 8.2
 - Composer
-- Web server (XAMPP)
+- Web server (XAMPP / Laragon)
 
 ## Instalasi
 
 1. **Clone repository ini**
    ```bash
-   git clone [URL repository]
+   git clone https://github.com/Sufyaan1301/belajar-ci-tugas.git
    cd belajar-ci-tugas
    ```
 2. **Install dependensi**
@@ -64,6 +66,12 @@ Proyek ini adalah platform toko online yang dibangun menggunakan [CodeIgniter 4]
    ```bash
    php spark db:seed UserSeeder
    ```
+   ```bash
+   php spark db:seed DiskonSeeder
+   ```
+   ```bash
+   php spark db:seed ProductCategorySeeder
+   ```
 6. **Jalankan server**
    ```bash
    php spark serve
@@ -79,11 +87,33 @@ Proyek menggunakan struktur MVC CodeIgniter 4:
   - AuthController.php - Autentikasi pengguna
   - ProdukController.php - Manajemen produk
   - TransaksiController.php - Proses transaksi
+  - ProdukCategoryController.php - Kategori dari produk
+  - DiskonController.php - Manajemen diskon produk
+  - PembelianController.php - Manajemen status transaksi
+  - ApiController.php - Menyediakan data transaksi
 - app/Models - Model untuk interaksi database
   - ProductModel.php - Model produk
   - UserModel.php - Model pengguna
+  - ProductCategoryModel - Model kategori produk
+  - TransactionModel - Model transaksi
+  - TransactionDetailModel - Model detail transaksi
+  - DiskonModel - Model Diskon
 - app/Views - Template dan komponen UI
   - v_produk.php - Tampilan produk
   - v_keranjang.php - Halaman keranjang
+  - v_categoryproduk.php - Halaman kategori produk
+  - v_chekout.php - Halaman checkout barang
+  - v_contact.php - Halaman kontak
+  - v_diskon.php - Halaman manajemen diskon
+  - v_faq.php - Halaman daftar pertanyaan
+  - v_home.php - Halaman Homepage
+  - v_login.php - Halaman login
+  - v_pembelian.php - Halaman pembelian / manajemen status transaksi
+  - v_produkPDF.php - Halaman ekspor data ke PDF
+  - v_profile.php - Halaman profile
 - public/img - Gambar produk dan aset
 - public/NiceAdmin - Template admin
+- public/Filters - Autentikasi
+  - Admin.php - Autentikasi role admin
+  - Auth.php - Autentikasi IsLoggedIn
+  - Redirect.php - Autentikasi FAQ

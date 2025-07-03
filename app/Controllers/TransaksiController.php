@@ -34,10 +34,13 @@ class TransaksiController extends BaseController
 
     public function cart_add()
     {
+        $diskon = session()->get('nominalDiskon') ?? 0;
+        $hargaasli = $this->request->getPost('harga');
+        $hargaDiskon = max($hargaasli - $diskon, 0);
         $this->cart->insert(array(
             'id' => $this->request->getPost('id'),
             'qty' => 1,
-            'price' => $this->request->getPost('harga'),
+            'price' => $hargaDiskon,
             'name' => $this->request->getPost('nama'),
             'options' => array('foto' => $this->request->getPost('foto'))
         ));
@@ -154,8 +157,10 @@ class TransaksiController extends BaseController
             $this->transaction->insert($dataForm);
 
             $last_insert_id = $this->transaction->getInsertID();
+            $nominaldiskon = session()->get('nominalDiskon') ?? 0;
 
             foreach ($this->cart->contents() as $value) {
+                $hargaafterDiskon = max($value['price'] - $nominaldiskon, 0);
                 $dataFormDetail = [
                     'transaction_id' => $last_insert_id,
                     'product_id' => $value['id'],
